@@ -1,0 +1,115 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Camera2D Boss Battle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Lighting/light.png" type="Texture" id=2]
+[ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Player back up 2.0.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Battle/Arena 2.png" type="Texture" id=8]
+[ext_resource path="res://Battle/g.png" type="Texture" id=10]
+[ext_resource path="res://Battle/test 2.png" type="Texture" id=12]
+[ext_resource path="res://Inventory/Inventory.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Inventory/UserInterface.gd" type="Script" id=15]
+[ext_resource path="res://Enemies/Creature 2 Battle.tscn" type="PackedScene" id=16]
+[ext_resource path="res://Battle/Platform 2.tscn" type="PackedScene" id=17]
+[ext_resource path="res://Attack/Acid Drop.tscn" type="PackedScene" id=18]
+
+[sub_resource type="CircleShape2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=27]
+extents = Vector2( 685.75, 93.875 )
+
+[node name="Battle 2" type="Node2D"]
+
+[node name="Light2D3" type="Light2D" parent="."]
+visible = false
+position = Vector2( 284, 24 )
+rotation = 0.00152677
+scale = Vector2( 7.31364, 2.86288 )
+texture = ExtResource( 2 )
+offset = Vector2( -20.9054, -33.1235 )
+texture_scale = 0.3
+color = Color( 0.211765, 0.00392157, 0.290196, 1 )
+energy = 2.37
+shadow_enabled = true
+shadow_gradient_length = 3.0
+shadow_filter = 2
+shadow_filter_smooth = 15.0
+
+[node name="Lll" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0.360784, 0.701961, 0.301961, 1 )
+position = Vector2( 190, 55 )
+scale = Vector2( 0.409213, 0.287435 )
+texture = ExtResource( 10 )
+
+[node name="Kk3" type="Sprite" parent="."]
+visible = false
+modulate = Color( 0.407843, 1, 0, 1 )
+position = Vector2( 180, 43 )
+scale = Vector2( 0.740909, 0.552588 )
+texture = ExtResource( 12 )
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="Platform" parent="StaticBody2D2" instance=ExtResource( 17 )]
+position = Vector2( 30, 65 )
+
+[node name="Creature 2" parent="StaticBody2D2" instance=ExtResource( 16 )]
+modulate = Color( 0.670588, 0.662745, 0.662745, 1 )
+position = Vector2( -88, 50 )
+
+[node name="Background" type="Sprite" parent="StaticBody2D2"]
+visible = false
+modulate = Color( 1, 0.376471, 0.329412, 1 )
+position = Vector2( 179, 94 )
+scale = Vector2( 0.738032, 0.650912 )
+texture = ExtResource( 8 )
+region_enabled = true
+region_rect = Rect2( 0, -2, 752, 482 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2( -1, -186 )
+shape = SubResource( 1 )
+
+[node name="Player" parent="StaticBody2D2" instance=ExtResource( 5 )]
+position = Vector2( 285, 77 )
+
+[node name="Camera2D" parent="StaticBody2D2/Player" instance=ExtResource( 1 )]
+position = Vector2( 272, -55 )
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="StaticBody2D2/Player"]
+position = Vector2( 187, 172 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 3 )]
+margin_left = 3.0
+margin_top = 205.0
+margin_right = 61.0
+margin_bottom = 217.0
+
+[node name="UserInterface" type="CanvasLayer" parent="."]
+script = ExtResource( 15 )
+
+[node name="Inventory" parent="UserInterface" instance=ExtResource( 14 )]
+visible = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+position = Vector2( 33, 152 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 71, 133.125 )
+shape = SubResource( 27 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PoolVector2Array( -476, 43, 719, 47, 712, 205, -485, 205 )
+
+[node name="Enemies" type="Node2D" parent="."]
+position = Vector2( 153, -71 )
+
+[node name="Acid Drop" parent="Enemies" instance=ExtResource( 18 )]
+position = Vector2( -99, 276 )
+
+[node name="Acid Drop2" parent="Enemies" instance=ExtResource( 18 )]
+position = Vector2( 170, 278 )
